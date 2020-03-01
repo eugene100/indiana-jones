@@ -59,7 +59,8 @@ class MazeRunner(object):
 
 
 def tests(num):
-    maze_example1 = {
+    maze_example = [
+    {
         'm': [
             [0, 1, 0, 0, 0],
             [0, 1, 1, 1, 1],
@@ -69,23 +70,62 @@ def tests(num):
         ],
         's': (0, 0),
         'f': (4, 4)
+    },
+    {
+    'm': [
+        [0,0,0,0,0,0,0,1],
+        [0,1,1,1,1,1,1,1],
+        [0,0,0,0,0,0,0,0],
+        [1,1,1,1,0,1,0,1],
+        [0,0,0,0,0,1,0,1],
+        [0,1,0,1,1,1,1,1],
+        [1,1,0,0,0,0,0,0],
+        [0,0,0,1,1,1,1,0],
+    ],
+    's': (7,7),
+    'f': (0,0)
+    },
+    {
+    'm': [
+        [0,0,0,1,1,0,1,1,0,0,0],
+        [0,1,0,0,0,0,0,0,0,1,0],
+        [0,1,0,1,1,1,1,1,0,1,0],
+        [0,0,0,1,0,0,0,1,0,0,0],
+        [0,0,1,1,0,0,0,1,1,0,0],
+        [0,0,1,0,0,0,0,0,1,0,0],
+        [0,0,1,0,1,0,1,0,1,0,0],
+        [0,0,1,0,0,0,0,0,1,0,0],
+        [0,0,1,1,1,0,1,1,1,0,0],
+        [0,0,0,0,0,0,0,0,0,0,0],
+        [0,0,1,0,1,0,1,0,1,0,0],
+    ],
+    's': (0,5),
+    'f': (4,5)
     }
-    return maze_example1
+    ]
+    return maze_example[num]
 
 
 def maze_controller(maze_runner):
-    return
+
+    while(True):
+        if maze_runner.found():
+            return
+        if maze_runner.go():
+            maze_runner.turn_right()
+        else:
+            maze_runner.turn_left()
 
 
 def main():
-    maze_example = tests(0)
+    maze_example = tests(1)
     maze_runner = MazeRunner(
         maze_example['m'],
         maze_example['s'],
         maze_example['f']
-    )  # ініціалізація робота
-    maze_controller(maze_runner)  # виклик вашої функції
-    print maze_runner.found()  # перевірка того, що артефакт знайдено, повинно бути True
+    )
+    maze_controller(maze_runner)
+    print maze_runner.found()
     return
 
 
